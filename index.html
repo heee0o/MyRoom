@@ -566,8 +566,8 @@
         <div class="intro-cards">
             <div class="card">
                 <h3>🎮 My Web Game</h3>
-                <p>폭탄을 피하는 미니 게임!</p>
-                <button class="btn-shiny" style="font-size: 1rem; margin-top: 15px;" onclick="window.open('https://example.com')">게임 하러가기</button>
+                <p>폭탄을 피해서 별을 먹고, 최대한 오래 살아남아 점수를 올리는 미니게임입니다!</p>
+                <button class="btn-shiny" style="font-size: 1rem; margin-top: 15px;" onclick="window.open('https://heee0o.github.io/rabbit-game/')">게임 하러가기</button>
             </div>
             <div class="card">
                 <h3>💼 Business Web</h3>
@@ -578,15 +578,16 @@
     </section>
 
     <section id="Work">
-        <h2 style="color: var(--accent-pink); font-size: 2.5rem;">문의환영!</h2>
+        <h2 style="color: var(--accent-pink); font-size: 2.5rem;">SKILLS</h2>
         <div class="diary-box" style="margin-top: 30px;">
             <p>영상 편집부터 디자인, 웹 구축까지 정성스럽게 작업하고 있어요.<br/>
                 소중한 프로젝트 제안은 언제든 환영이니 편하게 말을 걸어주세요!</p>
             <div class="intro-cards">
-                <div class="card">✨ #프리미어</div>
-                <div class="card">🐰 #포토샵</div>
-                <div class="card">💖 #일러스트</div>
-                <div class="card">🔗 #웹</div>
+            <div class="card">🎬 #영상_디자인</div>
+<div class="card">🎨 #그래픽_아트</div>
+<div class="card">🔗 #웹_개발</div>
+<div class="card">🤖 #AI_활용</div>
+    
             </div>
         </div>
     </section>
@@ -682,7 +683,7 @@
             <i class="fa-brands fa-instagram" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
         </a>
     </div>
-    <p style="margin-top: 20px; opacity: 0.6;">© 2026 Princess Space. All rights reserved.</p>
+    <p style="margin-top: 20px; opacity: 0.6;">© 2026 My Room Space. All rights reserved.</p>
 </section>
 
     <div id="modal" onclick="this.style.display='none'"><img id="modal-img"></div>
@@ -755,7 +756,7 @@
 
 document.addEventListener("mousemove", e => {
   const now = Date.now();
-  // 성능을 위해 40ms마다 한 번씩만 생성 (너무 많이 생기면 렉 걸려요!)
+  // 성능을 위해 40ms마다 한 번씩만 생성 
   if (now - lastTime < 40) return; 
   lastTime = now;
 
@@ -810,7 +811,7 @@ const fortunes = [
    { icon: '💩', text: '길 가다 똥 밟을 확률 99.8%! 발밑 잘 보고 다니기' }
 ];
 
-// ✅ 이 코드로 교체하세요!
+
 function getFortune() {
     // 로컬 스토리지에서 마지막으로 뽑은 날짜를 가져옵니다.
     const lastDate = localStorage.getItem('lastGachaDate');
