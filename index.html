@@ -9,7 +9,7 @@
     <style>
     :root {
         
-    --bg-color: #fff0f5;
+    --bg-color: #ffd1d1;
     --main-pink: #ffa7b4;
     --accent-pink: #ff69b4;
     --lace-white: #ffffff;
@@ -539,9 +539,67 @@
 .shake-screen {
     animation: shake 0.5s; /* 0.5초 동안 흔들림 */
 }
+/* 빼꼼 친구들 - 화면에 박제! */
+.peeker {
+    position: fixed; /* 절대 안 없어지게 고정 */
+    z-index: 9999;
+    font-size: 60px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    filter: drop-shadow(0 10px 15px rgba(255, 105, 180, 0.3));
+}
+
+/* 왼쪽 토끼: 화면 중앙쯤에 고정 */
+.peeker-left {
+    left: -30px;
+    top: 40%; 
+    transform: rotate(90deg);
+}
+
+/* 오른쪽 곰돌이: 화면 약간 아래쪽에 고정 */
+.peeker-right {
+    right: -30px;
+    top: 60%;
+    transform: rotate(-90deg);
+}
+
+/* 마우스 올리면 쑥! 튀어나오기 */
+.peeker-left:hover { left: 20px; transform: rotate(70deg) scale(1.2); }
+.peeker-right:hover { right: 20px; transform: rotate(-70deg) scale(1.2); }
+
+/* 말풍선: 더 깜찍하게 */
+.bubble {
+    position: absolute;
+    background: #fff;
+    padding: 10px 18px;
+    border-radius: 25px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #ff6a95;
+    border: 3px solid #ffafbd;
+    box-shadow: 0 8px 0 #ffafbd; /* 입체감 있는 버튼 느낌 */
+    white-space: nowrap;
+    opacity: 0;
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+.peeker-left .bubble { bottom: 100%; left: 40px; transform: rotate(-90deg); }
+.peeker-right .bubble { bottom: 100%; right: 40px; transform: rotate(90deg); }
+
+.peeker:hover .bubble { opacity: 1; margin-bottom: 20px; }
     </style>
 </head>
 <body data-theme="light">
+    <div id="bunny" class="peeker peeker-left">
+    <div class="emoji">🐰</div>
+    <div class="bubble">안 없어질 거야! 🥕</div>
+</div>
+
+<div id="bear" class="peeker peeker-right">
+    <div class="emoji">🧸</div>
+    <div class="bubble">끝까지 쫓아간다! ✨</div>
+</div>
     <div id="rain-container"></div>
 
     <canvas id="star-canvas"></canvas>
@@ -783,11 +841,11 @@ document.addEventListener("mousemove", e => {
     const opacity = Math.random() * 0.5 + 0.4;
     sparkle.style.background = `
       radial-gradient(circle,
-      rgba(255,255,255,${opacity}) 0%,
-      rgba(255,182,230,${opacity}) 40%,
+      rgba(255,255,255,${opacity}) 60%,
+      rgba(255,182,230,${opacity}) 100%,
       transparent 80%)
     `;
-    sparkle.style.boxShadow = `0 0 4px rgba(255,182,230,0.6)`;
+    sparkle.style.boxShadow = `0 0 6px rgba(255,182,230,0.6)`;
 
     // 화면에 추가
     document.body.appendChild(sparkle);
@@ -944,6 +1002,43 @@ function enterRoom() {
         location.href = '#projects'; // 이동하고 싶은 섹션 ID
     }, 400);
 }
+const bunnyLines = ["...","😡","노잼","❤️","화이팅!!", "뭘 봐..;;", "너 친구 없지?", "아.. 귀찮아", "ㅠㅠ", "클릭하지 마셈!"];
+const bearLines = ["😱","😑","...","현생을 살아...", "ㅎㅎㅎ", "와.. 지독한 스크롤", "이거 만들 시간에 공부를 했으면.. 💤", "배고파.. ", "💢"];
+
+function initPeeker(id, lines) {
+    const peeker = document.getElementById(id);
+    const bubble = peeker.querySelector('.bubble');
+    const emoji = peeker.querySelector('.emoji');
+    
+    // 1. 랜덤 대사
+    peeker.addEventListener('mouseenter', () => {
+        bubble.innerText = lines[Math.floor(Math.random() * lines.length)];
+    });
+
+    // 2. 클릭하면 '심쿵' 효과
+    peeker.addEventListener('click', () => {
+        bubble.innerText = "💖";
+        emoji.style.transform = "scale(1.5) rotate(360deg)";
+        setTimeout(() => emoji.style.transform = "scale(1)", 500);
+    });
+
+    // 3. 스크롤 방향에 따라 위아래 쳐다보기 (대박 디테일)
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > lastScroll) {
+            // 내려갈 때: 아래쪽을 봄
+            emoji.style.marginTop = "10px";
+        } else {
+            // 올라갈 때: 위쪽을 봄
+            emoji.style.marginTop = "-10px";
+        }
+        lastScroll = currentScroll;
+    });
+}
+
+initPeeker('bunny', bunnyLines);
+initPeeker('bear', bearLines);
     </script>
 
 </body>
